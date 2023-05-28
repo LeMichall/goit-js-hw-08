@@ -8,23 +8,38 @@ const inputData = {
 };
 // saving values in local storage
 function localSave() {
-  inputData.email = inputEmail.value;
-  inputData.message = inputMessage.value;
-  localStorage.setItem('feedback-form-state', JSON.stringify(inputData));
+  try {
+    inputData.email = inputEmail.value;
+    inputData.message = inputMessage.value;
+    localStorage.setItem('feedback-form-state', JSON.stringify(inputData));
+  } catch (error) {
+    console.log('Something went wrong');
+    console.log(error.toString());
+  }
 }
 // loading values from local storage
 function localLoad() {
-  const savedData =
-    JSON.parse(localStorage.getItem('feedback-form-state')) || '';
-  inputEmail.value = savedData.email || '';
-  inputMessage.value = savedData.message || '';
+  try {
+    const savedData =
+      JSON.parse(localStorage.getItem('feedback-form-state')) || '';
+    inputEmail.value = savedData.email || '';
+    inputMessage.value = savedData.message || '';
+  } catch (error) {
+    console.log('Something went wrong');
+    console.log(error.toString());
+  }
 }
 // clearing inputs and local storage
 function localSubmit(event) {
-  event.preventDefault();
-  console.log(inputData);
-  localStorage.removeItem('feedback-form-state');
-  form.reset();
+  try {
+    event.preventDefault();
+    console.log(inputData);
+    localStorage.removeItem('feedback-form-state');
+    form.reset();
+  } catch (error) {
+    console.log('Something went wrong');
+    console.log(error.toString());
+  }
 }
 window.addEventListener('load', localLoad);
 form.addEventListener('submit', localSubmit);
