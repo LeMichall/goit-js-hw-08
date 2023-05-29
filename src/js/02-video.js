@@ -8,7 +8,8 @@ function updateTimer(data) {
 }
 // setting video timer from localstorage
 function setTimer() {
-  player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+  if (localStorage.getItem('videoplayer-current-time'))
+    player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
 }
 
 player.on('timeupdate', throttle(updateTimer, 1000));
